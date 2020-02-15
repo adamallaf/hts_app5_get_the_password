@@ -1,0 +1,37 @@
+00402FBE  /$ 55             PUSH EBP
+00402FBF  |. 8BEC           MOV EBP,ESP
+00402FC1  |. 8B45 08        MOV EAX,DWORD PTR SS:[EBP+8]
+00402FC4  |. 56             PUSH ESI
+00402FC5  |. 833C85 6874400>CMP DWORD PTR DS:[EAX*4+407468],0
+00402FCD  |. 8D3485 6874400>LEA ESI,DWORD PTR DS:[EAX*4+407468]
+00402FD4  |. 75 3E          JNZ SHORT app5win.00403014
+00402FD6  |. 57             PUSH EDI
+00402FD7  |. 6A 18          PUSH 18
+00402FD9  |. E8 56000000    CALL app5win.00403034
+00402FDE  |. 8BF8           MOV EDI,EAX
+00402FE0  |. 59             POP ECX
+00402FE1  |. 85FF           TEST EDI,EDI
+00402FE3  |. 75 08          JNZ SHORT app5win.00402FED
+00402FE5  |. 6A 11          PUSH 11
+00402FE7  |. E8 24E3FFFF    CALL app5win.00401310
+00402FEC  |. 59             POP ECX
+00402FED  |> 6A 11          PUSH 11
+00402FEF  |. E8 CAFFFFFF    CALL app5win.00402FBE
+00402FF4  |. 833E 00        CMP DWORD PTR DS:[ESI],0
+00402FF7  |. 59             POP ECX
+00402FF8  |. 57             PUSH EDI                                 ; /pCriticalSection
+00402FF9  |. 75 0A          JNZ SHORT app5win.00403005               ; |
+00402FFB  |. FF15 80604000  CALL DWORD PTR DS:[<&KERNEL32.Initialize>; \InitializeCriticalSection
+00403001  |. 893E           MOV DWORD PTR DS:[ESI],EDI
+00403003  |. EB 06          JMP SHORT app5win.0040300B
+00403005  |> E8 AB090000    CALL app5win.004039B5
+0040300A  |. 59             POP ECX
+0040300B  |> 6A 11          PUSH 11
+0040300D  |. E8 0D000000    CALL app5win.0040301F
+00403012  |. 59             POP ECX
+00403013  |. 5F             POP EDI
+00403014  |> FF36           PUSH DWORD PTR DS:[ESI]                  ; /pCriticalSection
+00403016  |. FF15 0C604000  CALL DWORD PTR DS:[<&KERNEL32.EnterCriti>; \EnterCriticalSection
+0040301C  |. 5E             POP ESI
+0040301D  |. 5D             POP EBP
+0040301E  \. C3             RETN

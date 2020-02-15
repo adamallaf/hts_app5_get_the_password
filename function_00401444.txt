@@ -1,0 +1,13 @@
+00401444  /$ 8B4424 04      MOV EAX,DWORD PTR SS:[ESP+4]   ;;; 0018FEF0 + 4 (arg passed to @00401103) [= 0x01]
+00401448  |. 83F8 14        CMP EAX,14
+0040144B  |. 7D 0B          JGE SHORT app5win.00401458
+0040144D  |. 83C0 1C        ADD EAX,1C                     ;;; EAX = 0x0000001D
+00401450  |. 50             PUSH EAX
+00401451  |. E8 681B0000    CALL app5win.00402FBE
+00401456  |. 59             POP ECX
+00401457  |. C3             RETN
+00401458  |> 8B4424 08      MOV EAX,DWORD PTR SS:[ESP+8]
+0040145C  |. 83C0 20        ADD EAX,20
+0040145F  |. 50             PUSH EAX                                 ; /pCriticalSection
+00401460  |. FF15 0C604000  CALL DWORD PTR DS:[<&KERNEL32.EnterCriti>; \EnterCriticalSection
+00401466  \. C3             RETN

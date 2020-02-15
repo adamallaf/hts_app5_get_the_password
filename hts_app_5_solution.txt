@@ -1,0 +1,10 @@
+solution:
+open the app with olly debug than follow the steps below:
+
+1. put breakpoint @004010C3 on this line:
+004010C3  |. 3B4495 E8      |CMP EAX,DWORD PTR SS:[EBP+EDX*4-18]
+
+2. put "DWORD PTR SS:[EBP+EDX*4-18]" on watch
+3. set EAX equal to "DWORD PTR SS:[EBP+EDX*4-18]"
+4. step over (F8 button) to get first 4 characters
+5. repeat until you get the password (the pass ends with \n)
